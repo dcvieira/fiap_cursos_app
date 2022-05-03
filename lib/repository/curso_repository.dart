@@ -1,7 +1,12 @@
+import 'package:fiap_cursos_app/repository/database.dart';
+
 import '../models/curso_model.dart';
 
 class CursoRepository {
-  List<CursoModel> findAll() {
+  Future<List<CursoModel>> findAllAsync() async {
+    var db = Database();
+    await db.createDatabase();
+
     return <CursoModel>[
       CursoModel(
           id: 1,

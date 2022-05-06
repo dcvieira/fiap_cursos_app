@@ -1,3 +1,4 @@
+import 'package:fiap_cursos_app/screens/cursos_detalhes_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../models/curso_model.dart';
@@ -37,6 +38,18 @@ class _CursosScreenState extends State<CursosScreen> {
             }
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(
+            context,
+            '/curso_detalhes',
+            arguments:
+                CursoModel(id: 1, nome: 'nome', nivel: 'nivel', preco: 10),
+          );
+        },
+        backgroundColor: Color.fromRGBO(64, 75, 96, .9),
+        child: Icon(Icons.arrow_forward),
       ),
     );
   }
@@ -107,10 +120,24 @@ class _CursosScreenState extends State<CursosScreen> {
             size: 30.0,
           ),
           onTap: () {
-            print('Navegar');
+            navegarTelaCursoDetalhes(context, curso);
           },
         ),
       ),
     );
+  }
+
+  void navegarTelaCursoDetalhes(ctx, curso) async {
+    final retorno = await Navigator.pushNamed(
+      ctx,
+      "/curso_detalhes",
+      arguments: curso,
+    );
+
+    CursoModel? cursoModel = retorno as CursoModel?;
+
+    if (cursoModel != null) {
+      print(cursoModel.nome);
+    }
   }
 }

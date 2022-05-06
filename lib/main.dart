@@ -1,3 +1,4 @@
+import 'package:fiap_cursos_app/screens/cursos_detalhes_screen.dart';
 import 'package:fiap_cursos_app/screens/cursos_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: CursosScreen(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => CursosScreen(),
+        '/curso_detalhes': (context) => CursoDetalhesScreen(),
+      },
     );
   }
 }

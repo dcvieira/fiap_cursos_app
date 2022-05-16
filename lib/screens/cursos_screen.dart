@@ -1,6 +1,4 @@
-import 'package:fiap_cursos_app/screens/cursos_detalhes_screen.dart';
 import 'package:flutter/material.dart';
-
 import '../models/curso_model.dart';
 import '../repository/curso_repository.dart';
 
@@ -40,16 +38,23 @@ class _CursosScreenState extends State<CursosScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(
+        onPressed: () async {
+          var result = await Navigator.pushNamed(
             context,
-            '/curso_detalhes',
-            arguments:
-                CursoModel(id: 1, nome: 'nome', nivel: 'nivel', preco: 10),
+            '/curso_novo',
           );
+
+          CursoModel? cursoModel = result as CursoModel?;
+          if (cursoModel != null) {
+            final snackBar = SnackBar(
+              content: Text('Curso cadastrado com sucesso!'),
+            );
+
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+          }
         },
         backgroundColor: Color.fromRGBO(64, 75, 96, .9),
-        child: Icon(Icons.arrow_forward),
+        child: Icon(Icons.add),
       ),
     );
   }
